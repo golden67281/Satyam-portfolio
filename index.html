@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Portfolio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+
+/* ===== THEME ===== */
+:root{
+ --a1:#a78bfa;
+ --a2:#22d3ee;
+ --glass:rgba(255,255,255,.07);
+ --border:rgba(255,255,255,.18);
+ --text:#e6e6f0;
+}
+.light{
+ --text:#111;
+ --glass:rgba(0,0,0,.05);
+ --border:rgba(0,0,0,.18);
+}
+
+/* ===== BACKGROUND ===== */
+body{
+ background:linear-gradient(-45deg,#0f0f1a,#1a1b2e,#0b132b,#141427);
+ background-size:400% 400%;
+ animation:bg 18s linear infinite;
+ color:var(--text);
+}
+@keyframes bg{0%{background-position:0 0}100%{background-position:400% 0}}
+
+/* ===== NAV (UNCHANGED STRUCTURE) ===== */
+nav{
+ position:fixed;top:0;width:100%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:12px clamp(14px,6vw,7%);
+ background:#0b0b15;
+ z-index:1000;
+ flex-wrap:wrap;
+}
+nav h2{
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ font-size:clamp(18px,4vw,24px);
+}
+nav ul{
+ display:flex;
+ gap:clamp(10px,3vw,22px);
+ list-style:none;
+ flex-wrap:wrap;
+}
+nav a{
+ color:#cbd5f1;
+ text-decoration:none;
+ font-weight:600;
+ font-size:clamp(13px,3.5vw,15px);
+ transition:.25s;
+}
+nav a:hover{
+ color:var(--a2);
+ text-shadow:0 0 10px rgba(34,211,238,.7);
+}
+.themeBtn{
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ border:none;padding:6px 12px;border-radius:8px;
+ font-weight:700;cursor:pointer;
+}
+
+/* ===== SECTIONS ===== */
+section{
+ padding:clamp(80px,14vw,120px) clamp(14px,6vw,8%);
+ scroll-margin-top:95px;
+}
+.title{
+ font-size:clamp(20px,6vw,32px);
+ margin-bottom:26px;
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+}
+
+/* ===== HERO ===== */
+.hero{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:clamp(20px,6vw,50px);
+ flex-wrap:wrap;
+}
+.hero h1{font-size:clamp(24px,7vw,48px)}
+.typing{font-size:clamp(15px,5vw,22px);color:var(--a2)}
+
+.btn{
+ display:inline-block;
+ margin-top:18px;
+ padding:12px 18px;
+ border-radius:12px;
+ text-decoration:none;
+ font-weight:bold;
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ color:black;
+ transition:.3s;
+ text-align:center;
+}
+.btn:hover{
+ transform:scale(1.05);
+ box-shadow:0 0 22px rgba(167,139,250,.9);
+}
+
+/* ===== PROFILE IMAGE ===== */
+.hero-img{
+ width:clamp(140px,50vw,260px);
+ height:clamp(140px,50vw,260px);
+ border-radius:50%;
+ overflow:hidden;
+ border:3px solid rgba(167,139,250,.5);
+ transition:.4s;
+ margin:auto;
+}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img:hover{
+ transform:scale(1.06);
+ box-shadow:0 0 50px rgba(167,139,250,.7);
+}
+
+/* ===== GLASS + GLOW ===== */
+.glass{
+ background:var(--glass);
+ backdrop-filter:blur(12px);
+ border:1px solid var(--border);
+ border-radius:16px;
+ padding:clamp(14px,4vw,22px);
+ transition:.35s;
+ position:relative;
+ overflow:hidden;
+}
+.glass:hover{
+ transform:translateY(-8px);
+ box-shadow:
+ 0 0 30px rgba(167,139,250,.35),
+ 0 0 60px rgba(34,211,238,.25);
+}
+
+/* ===== GRID ===== */
+.grid{
+ display:grid;
+ grid-template-columns:
+ repeat(auto-fit,minmax(min(240px,100%),1fr));
+ gap:18px;
+}
+
+/* ===== SKILLS ===== */
+.skill-row{margin-bottom:20px}
+.skill-head{
+ display:flex;
+ justify-content:space-between;
+ flex-wrap:wrap;
+}
+.bar{height:12px;background:#1f2937;border-radius:20px;overflow:hidden}
+.bar div{
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ transition:width 1.4s ease;
+}
+
+/* ===== GITHUB PROFILE PANEL ===== */
+.github-panel{
+ display:flex;
+ gap:18px;
+ align-items:center;
+ flex-wrap:wrap;
+}
+.github-avatar{
+ width:110px;height:110px;border-radius:50%;
+ overflow:hidden;border:3px solid rgba(167,139,250,.5);
+}
+
+.github-avatar img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block;
+}
+.github-meta{
+ display:flex;gap:12px;flex-wrap:wrap;margin:10px 0;
+}
+.github-chip{
+ padding:6px 10px;border-radius:999px;
+ background:rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.18);
+ font-size:13px;
+}
+
+/* ===== CONTACT ===== */
+input,textarea{
+ width:100%;
+ padding:14px;
+ margin-bottom:14px;
+ border-radius:10px;
+ border:none;
+ background:#1f2937;
+ color:white;
+ font-size:16px;
+}
+
+/* ===== CONTRIBUTION ===== */
+.contrib-wrap{
+ overflow-x:auto;
+ -webkit-overflow-scrolling:touch;
+}
+.contrib-inner{min-width:640px}
+
+/* ===== REVEAL ===== */
+.reveal{
+ opacity:0;
+ transform:translateY(50px) scale(.98);
+ transition:.9s cubic-bezier(.22,1,.36,1);
+}
+.reveal.show{opacity:1;transform:none}
+/* ===== GitHub Repo Upgrade ===== */
+
+.repo-card{
+ position:relative;
+}
+
+.repo-top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:8px;
+ gap:10px;
+ flex-wrap:wrap;
+}
+
+.repo-lang{
+ font-size:12px;
+ padding:4px 8px;
+ border-radius:999px;
+ background:rgba(34,211,238,.15);
+ border:1px solid rgba(34,211,238,.35);
+}
+
+.repo-stats{
+ font-size:13px;
+ opacity:.85;
+ margin-top:8px;
+ display:flex;
+ gap:12px;
+ flex-wrap:wrap;
+}
+
+.repo-badge{
+ position:absolute;
+ top:10px;
+ right:10px;
+ font-size:11px;
+ padding:4px 8px;
+ border-radius:999px;
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ color:black;
+ font-weight:700;
+}
+
+.repo-filters{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-bottom:22px;
+}
+
+.filter-btn{
+ padding:8px 14px;
+ border-radius:999px;
+ border:1px solid var(--border);
+ background:var(--glass);
+ cursor:pointer;
+}
+
+.filter-btn.active{
+ background:linear-gradient(90deg,var(--a1),var(--a2));
+ color:black;
+ font-weight:700;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width:900px){
+.hero{flex-direction:column;text-align:center}
+.btn{width:100%}
+.github-panel{flex-direction:column;text-align:center}
+}
+
+/* ===== FINAL THEME FIX — NO LAYOUT CHANGE ===== */
+
+.light body{
+ background:#f4f6fb;
+ color:#111;
+ animation:none;
+}
+
+.light nav{
+ background:#ffffff;
+ box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.light nav a{
+ color:#222;
+}
+
+.light .glass{
+ background:rgba(255,255,255,.92);
+ border:1px solid rgba(0,0,0,.12);
+}
+
+.light .github-chip{
+ background:#eef2f7;
+ border:1px solid rgba(0,0,0,.12);
+}
+
+.light input,
+.light textarea{
+ background:#ffffff;
+ color:#111;
+ border:1px solid rgba(0,0,0,.15);
+}
+
+.light .bar{
+ background:#e5e7eb;
+}
+
+.light footer{
+ background:#e9ecf3;
+ color:#111;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Portfolio</h2>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#github-profile">GitHub</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><button class="themeBtn" onclick="toggleTheme()">Theme</button></li>
+</ul>
+</nav>
+
+<section class="hero reveal" id="home">
+<div>
+<h1>SATYAM SHARMA</h1>
+<div class="typing" id="typing"></div>
+<a href="resume.pdf" class="btn">Download Resume</a>
+</div>
+<div class="hero-img"><img src="Satyam_image.png"></div>
+</section>
+
+<section id="skills" class="reveal">
+<h2 class="title">Skills</h2>
+<div class="glass">
+<div class="skill-row">
+<div class="skill-head"><span>Java</span><span>90%</span></div>
+<div class="bar"><div data-width="90%"></div></div>
+</div>
+<div class="skill-row">
+<div class="skill-head"><span>Python</span><span>85%</span></div>
+<div class="bar"><div data-width="85%"></div></div>
+</div>
+<div class="skill-row">
+<div class="skill-head"><span>Machine Learning</span><span>75%</span></div>
+<div class="bar"><div data-width="75%"></div></div>
+</div>
+</div>
+</section>
+
+<section id="github-profile" class="reveal">
+<h2 class="title">GitHub Profile</h2>
+<div class="glass github-panel" id="githubPanel">Loading profile...</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">GitHub Projects</h2>
+
+<div class="repo-filters" id="repoFilters">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="ml">ML/AI</button>
+<button class="filter-btn" data-filter="java">Java</button>
+<button class="filter-btn" data-filter="python">Python</button>
+<button class="filter-btn" data-filter="web">Web</button>
+</div>
+
+<div class="grid" id="projectsBox"></div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Contribution Activity</h2>
+<div class="glass contrib-wrap">
+<div class="contrib-inner">
+<img id="contribGraph">
+</div>
+</div>
+</section>
+
+<section id="contact" class="reveal">
+<h2 class="title">Contact</h2>
+<div class="glass">
+<form onsubmit="event.preventDefault();alert('Message sent');">
+<input placeholder="Name" required>
+<input placeholder="Email" required>
+<textarea rows="5" placeholder="Message"></textarea>
+<button class="btn">Send Message</button>
+</form>
+</div>
+</section>
+
+<footer>© 2026 Portfolio</footer>
+
+<script>
+const username="golden67281";
+
+function toggleTheme(){
+ document.documentElement.classList.toggle("light");
+ localStorage.setItem(
+  "theme",
+  document.documentElement.classList.contains("light")
+   ? "light" : "dark"
+ );
+}
+
+/* restore theme on load */
+if(localStorage.getItem("theme")==="light"){
+ document.documentElement.classList.add("light");
+}
+
+/* typing */
+const words=["Java Developer","AI Learner","ML Enthusiast"];
+let i=0,j=0,d=false;
+function type(){
+ let w=words[i];
+ typing.textContent=w.slice(0,d?--j:++j);
+ if(!d && j==w.length){d=true;setTimeout(type,900);return;}
+ if(d && j==0){d=false;i=(i+1)%words.length;}
+ setTimeout(type,d?50:90);
+}
+type();
+
+/* reveal */
+const reveals=document.querySelectorAll(".reveal");
+addEventListener("scroll",()=>{
+ reveals.forEach(el=>{
+  if(el.getBoundingClientRect().top<innerHeight-80){
+   el.classList.add("show");
+  }
+ });
+});
+
+/* skill bars */
+setTimeout(()=>{
+ document.querySelectorAll(".bar div").forEach(el=>{
+  el.style.width=el.dataset.width;
+ });
+},600);
+
+/* GitHub profile */
+/* ===== Verified GitHub Profile Panel ===== */
+
+fetch(`https://api.github.com/users/${username}`)
+.then(r=>r.json())
+.then(u=>{
+
+ if(!u || u.message){
+   githubPanel.innerHTML = "GitHub profile not found";
+   return;
+ }
+
+ githubPanel.innerHTML = `
+ <div class="github-avatar">
+   <img src="${u.avatar_url}"
+        alt="GitHub avatar"
+        loading="lazy"
+        referrerpolicy="no-referrer">
+ </div>
+
+ <div>
+   <h3>${u.name || u.login}</h3>
+   <p>${u.bio || ""}</p>
+
+   <div class="github-meta">
+     <div class="github-chip">Repos ${u.public_repos}</div>
+     <div class="github-chip">Followers ${u.followers}</div>
+     <div class="github-chip">Following ${u.following}</div>
+   </div>
+
+   <a class="btn"
+      target="_blank"
+      rel="noopener"
+      href="https://github.com/${username}">
+      Visit GitHub Profile
+   </a>
+ </div>
+ `;
+})
+.catch(()=>{
+ githubPanel.innerHTML = "GitHub load error";
+});
+/* repos auto update */
+const projectsBox = document.getElementById("projectsBox");
+let allRepos = [];
+
+function detectTag(repo){
+ const text = (repo.name + " " + (repo.description||"")).toLowerCase();
+
+ if(text.includes("ml") || text.includes("ai") || text.includes("model"))
+   return "ml";
+
+ if(repo.language === "Java") return "java";
+ if(repo.language === "Python") return "python";
+ if(repo.language === "JavaScript" || repo.language === "HTML" || repo.language === "CSS")
+   return "web";
+
+ return "other";
+}
+
+function renderRepos(filter="all"){
+ projectsBox.innerHTML = "";
+
+ allRepos
+  .filter(r => filter==="all" || r.tag===filter)
+  .slice(0,12)
+  .forEach(repo=>{
+
+   const badge = repo.stargazers_count >= 5 ? `<div class="repo-badge">Popular</div>` : "";
+
+   projectsBox.innerHTML += `
+   <div class="glass repo-card">
+     ${badge}
+     <div class="repo-top">
+       <h3>${repo.name}</h3>
+       <div class="repo-lang">${repo.language || "Code"}</div>
+     </div>
+
+     <p>${repo.description || ""}</p>
+
+     <div class="repo-stats">
+       ⭐ ${repo.stargazers_count}
+       🍴 ${repo.forks_count}
+       🕒 ${repo.updated_at.slice(0,10)}
+     </div>
+
+     <a class="btn" target="_blank"
+        href="${repo.html_url}">
+        View Repo
+     </a>
+   </div>`;
+  });
+}
+
+async function loadRepos(){
+ try{
+  const r = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+  let repos = await r.json();
+
+  repos = repos.filter(r=>!r.fork);
+
+  repos.forEach(r => r.tag = detectTag(r));
+
+  // sort by stars first
+  repos.sort((a,b)=>b.stargazers_count - a.stargazers_count);
+
+  allRepos = repos;
+
+  renderRepos();
+
+ }catch(e){
+  projectsBox.innerHTML = "<div class='glass'>GitHub load failed</div>";
+ }
+}
+
+loadRepos();
+
+document.getElementById("repoFilters")
+?.addEventListener("click", e=>{
+ if(!e.target.dataset.filter) return;
+
+ document.querySelectorAll(".filter-btn")
+ .forEach(b=>b.classList.remove("active"));
+
+ e.target.classList.add("active");
+
+ renderRepos(e.target.dataset.filter);
+});
+
+contribGraph.src=`https://ghchart.rshah.org/22d3ee/${username}`;
+</script>
+
+</body>
+</html>
