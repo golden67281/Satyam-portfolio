@@ -561,8 +561,8 @@ nav.shrunk { height:58px; }
    CODING PROFILES PANEL
 ===================================================== */
 .profiles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 30px;
   margin-bottom: 50px;
 }
@@ -575,7 +575,6 @@ nav.shrunk { height:58px; }
   border-radius:24px; padding:36px;
   backdrop-filter:blur(16px);
   transition:var(--t);
-  height: 100%;
 }
 .gh-profile-card:hover { border-color:var(--border-hover); }
 .lc-profile-card:hover { border-color: #ffa116; }
@@ -614,25 +613,34 @@ nav.shrunk { height:58px; }
 .lc-handle { font-size:15px; color:#ffa116; font-family:var(--mono); margin-bottom:12px; }
 .gh-bio, .lc-bio { font-size:15px; color:var(--txt2); margin-bottom:24px; line-height:1.6; }
 
-.gh-stats {
+.gh-stats, .lc-stats {
   display:grid; grid-template-columns:repeat(3,1fr);
   gap:14px; margin-bottom:24px;
 }
-.gh-stat {
+.gh-stat, .lc-stat {
   background:rgba(255,255,255,0.02);
   border:1px solid var(--border);
   border-radius:14px; padding:16px;
   text-align:center; transition:var(--t);
 }
 .gh-stat:hover { border-color:var(--c1); transform:translateY(-3px); }
-.gh-stat-num {
+.lc-stat:hover { border-color: #ffa116; transform:translateY(-3px); }
+
+.gh-stat-num, .lc-stat-num {
   font-size:26px; font-weight:900;
+  display:block; margin-bottom:2px;
+}
+.gh-stat-num {
   background:var(--grad-text);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text;
-  display:block; margin-bottom:2px;
 }
-.gh-stat-lbl { font-size:11px; color:var(--txt3); font-weight:600; text-transform:uppercase; letter-spacing:1px; }
+.lc-stat-num {
+  background: linear-gradient(135deg, #ffa116, #ff7a00);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.gh-stat-lbl, .lc-stat-lbl { font-size:11px; color:var(--txt3); font-weight:600; text-transform:uppercase; letter-spacing:1px; }
 
 /* =====================================================
    REPO CARDS
@@ -1451,6 +1459,7 @@ const LEETCODE_USERNAME = "golden67281"; // Replace with your actual LeetCode us
 const lcCard = document.getElementById('lcProfileCard');
 
 function renderLeetCodeStats(username, ranking, solved, easy, medium, hard) {
+  const medHardSum = Number(medium) + Number(hard);
   lcCard.innerHTML = `
     <div class="lc-avatar-wrap" style="display:flex; flex-direction:column; align-items:center;">
       <div class="lc-avatar">
@@ -1469,9 +1478,9 @@ function renderLeetCodeStats(username, ranking, solved, easy, medium, hard) {
       <div class="lc-handle">@${username}</div>
       <div class="lc-bio">Solving data structures and algorithms problems daily.</div>
       <div class="lc-stats">
-        <div class="lc-stat"><span class="lc-stat-num" style="background: linear-gradient(135deg, #00b8a3, #008071); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${solved}</span><span class="lc-stat-lbl">Solved</span></div>
-        <div class="lc-stat"><span class="lc-stat-num" style="background: linear-gradient(135deg, #ffc01e, #cc9600); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${easy}</span><span class="lc-stat-lbl">Easy</span></div>
-        <div class="lc-stat"><span class="lc-stat-num" style="background: linear-gradient(135deg, #ff375f, #cc1439); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${medium + hard}</span><span class="lc-stat-lbl">Med / Hard</span></div>
+        <div class="lc-stat"><span class="lc-stat-num">${solved}</span><span class="lc-stat-lbl">Solved</span></div>
+        <div class="lc-stat"><span class="lc-stat-num">${easy}</span><span class="lc-stat-lbl">Easy</span></div>
+        <div class="lc-stat"><span class="lc-stat-num">${medHardSum}</span><span class="lc-stat-lbl">Med / Hard</span></div>
       </div>
       <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
         <a href="https://leetcode.com/${username}" target="_blank" rel="noopener" class="btn-primary" style="width:fit-content; background: linear-gradient(135deg, #ffa116, #ff7a00); box-shadow: 0 4px 20px rgba(255, 161, 22, 0.25); font-size:13px; padding:10px 18px;">
@@ -1489,7 +1498,7 @@ Promise.all([
 ]).then(([profile, solvedData]) => {
   if (profile.errors || solvedData.errors || !profile.username) {
     // Fallback Mockup Stats if username doesn't exist
-    renderLeetCodeStats(LEETCODE_USERNAME, "210,482", "185", "85", "90", "10");
+    renderLeetCodeStats(LEETCODE_USERNAME, "210,482", 185, 85, 90, 10);
   } else {
     const ranking = profile.ranking ? profile.ranking.toLocaleString() : "N/A";
     const solved = solvedData.solvedProblem || 0;
@@ -1500,7 +1509,7 @@ Promise.all([
   }
 }).catch(() => {
   // Fallback Mockup Stats on network/fetch errors
-  renderLeetCodeStats(LEETCODE_USERNAME, "210,482", "185", "85", "90", "10");
+  renderLeetCodeStats(LEETCODE_USERNAME, "210,482", 185, 85, 90, 10);
 });
 </script>
 </body>
