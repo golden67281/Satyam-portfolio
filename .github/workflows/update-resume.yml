@@ -1,0 +1,44 @@
+name: Auto-Update Resume
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'SATYAM SHARMA.pdf'
+      - 'resume.html'
+
+jobs:
+  build-resume:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Generate Resume and PDF
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npm run build
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add resume.html "SATYAM SHARMA.pdf"
+        # Only commit and push if there are actual changes to keep history clean
+        if ! git diff --cached --quiet; then
+          git commit -m "docs: auto-update resume and pdf [skip ci]"
+          git push origin main
+        else
+          echo "No changes in resume."
+        fi

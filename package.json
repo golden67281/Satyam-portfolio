@@ -1,0 +1,12 @@
+{
+  "name": "satyam-portfolio-resume",
+  "version": "1.0.0",
+  "description": "Auto-updating resume compiler for Satyam Sharma",
+  "main": "generate-resume.js",
+  "scripts": {
+    "build": "node generate-resume.js && node compile-pdf.js"
+  },
+  "dependencies": {
+    "puppeteer": "^22.6.0"
+  }
+}

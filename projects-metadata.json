@@ -1,0 +1,14 @@
+{
+  "Attendance_Management_System": [
+    "Developed a web-based attendance system for students and teachers",
+    "Implemented login authentication and attendance tracking features",
+    "Designed MySQL database for storing attendance records",
+    "Improved attendance management efficiency through automated reporting"
+  ],
+  "Campus_Market": [
+    "Built a Campus Market platform for students to buy and sell products within the college campus.",
+    "Implemented product listing, search functionality, and user authentication features.",
+    "Designed responsive user interface for smooth browsing experience across devices.",
+    "Created backend database system to manage users, products, and transactions efficiently."
+  ]
+}
