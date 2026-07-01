@@ -1,11 +1,31 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+const fs = require('fs');
 
 async function run() {
   console.log('Compiling PDF from resume.html...');
-  const browser = await puppeteer.launch({
+  
+  const options = {
     args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
+  };
+  
+  // Local system browser paths fallback for Windows
+  const winChromePaths = [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+  ];
+  
+  for (const p of winChromePaths) {
+    if (fs.existsSync(p)) {
+      options.executablePath = p;
+      console.log('Using system browser:', p);
+      break;
+    }
+  }
+
+  const browser = await puppeteer.launch(options);
   const page = await browser.newPage();
   const filePath = path.resolve(__dirname, 'resume.html');
   await page.goto('file://' + filePath, { waitUntil: 'networkidle0' });
