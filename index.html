@@ -1086,6 +1086,172 @@ footer {
 .repo-card {
   animation: fade-slide-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* ===== PREMIUM CONTACT CARD GRID ===== */
+.contact-subtitle {
+  text-align: center;
+  max-width: 600px;
+  margin: -15px auto 45px auto;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 30px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.contact-glow-bg {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  z-index: 1;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.email-card .contact-glow-bg {
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
+  top: -50px;
+  right: -50px;
+}
+
+.linkedin-card .contact-glow-bg {
+  background: radial-gradient(circle, rgba(0, 119, 181, 0.15) 0%, transparent 70%);
+  top: -50px;
+  right: -50px;
+}
+
+.whatsapp-card .contact-glow-bg {
+  background: radial-gradient(circle, rgba(37, 211, 102, 0.15) 0%, transparent 70%);
+  top: -50px;
+  right: -50px;
+}
+
+.contact-card:hover .contact-glow-bg {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.contact-icon-wrapper {
+  width: 74px;
+  height: 74px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.email-card .contact-icon-wrapper {
+  background: var(--primary-gradient-glow);
+  color: var(--primary);
+}
+
+.linkedin-card .contact-icon-wrapper {
+  background: rgba(0, 119, 181, 0.1);
+  color: #0077b5;
+}
+
+.whatsapp-card .contact-icon-wrapper {
+  background: rgba(37, 211, 102, 0.1);
+  color: #25d366;
+}
+
+.contact-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 2;
+}
+
+.contact-value {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 26px;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-btn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: var(--transition);
+  position: relative;
+  z-index: 2;
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+}
+
+/* Card Hover Actions */
+.contact-card:hover {
+  transform: translateY(-8px);
+}
+
+.email-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.1);
+}
+
+.email-card:hover .contact-btn {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.linkedin-card:hover {
+  border-color: rgba(0, 119, 181, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 119, 181, 0.12);
+}
+
+.linkedin-card:hover .contact-btn {
+  background: #0077b5;
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.25);
+}
+
+.whatsapp-card:hover {
+  border-color: rgba(37, 211, 102, 0.35);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.12);
+}
+
+.whatsapp-card:hover .contact-btn {
+  background: #25d366;
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.contact-card:hover .contact-icon-wrapper {
+  transform: scale(1.1);
+}
 </style>
 </head>
 
@@ -1247,26 +1413,46 @@ footer {
 
 <!-- CONTACT SECTION -->
 <section id="contact" class="reveal">
-  <h2 class="title">Contact Me</h2>
-  <div class="glass contact-container">
-    <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.'); this.reset();">
-      <div class="form-group">
-        <label for="contact-name">Name</label>
-        <input id="contact-name" type="text" placeholder="Your Name" required>
+  <h2 class="title">Get In Touch</h2>
+  <p class="contact-subtitle">I'm always open to discussing new projects, creative ideas, or opportunities. Connect with me directly on any of these platforms:</p>
+  
+  <div class="contact-grid">
+    
+    <!-- Email Card -->
+    <a href="mailto:satyam13122004@gmail.com" class="glass contact-card email-card">
+      <div class="contact-glow-bg"></div>
+      <div class="contact-icon-wrapper">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" height="32" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
       </div>
-      <div class="form-group">
-        <label for="contact-email">Email</label>
-        <input id="contact-email" type="email" placeholder="your.email@example.com" required>
+      <h3>Email</h3>
+      <p class="contact-value">satyam13122004@gmail.com</p>
+      <span class="contact-btn">Send Email</span>
+    </a>
+
+    <!-- LinkedIn Card -->
+    <!-- Replace "satyam-sharma" with your actual LinkedIn username -->
+    <a href="https://www.linkedin.com/in/satyam-sharma" target="_blank" rel="noopener" class="glass contact-card linkedin-card">
+      <div class="contact-glow-bg"></div>
+      <div class="contact-icon-wrapper">
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="32" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
       </div>
-      <div class="form-group">
-        <label for="contact-msg">Message</label>
-        <textarea id="contact-msg" rows="5" placeholder="Write your message here..." required></textarea>
+      <h3>LinkedIn</h3>
+      <p class="contact-value">Let's Connect</p>
+      <span class="contact-btn">View Profile</span>
+    </a>
+
+    <!-- WhatsApp Card -->
+    <!-- Replace "919876543210" with your actual WhatsApp phone number including country code -->
+    <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="glass contact-card whatsapp-card">
+      <div class="contact-glow-bg"></div>
+      <div class="contact-icon-wrapper">
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="32" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.62.962 3.238 1.488 4.858 1.489 5.485.002 9.948-4.457 9.95-9.943.001-2.657-1.033-5.155-2.909-7.03C16.671 1.796 14.177.765 11.519.765c-5.488 0-9.95 4.458-9.953 9.944-.001 2.01.524 3.978 1.522 5.711l-1.001 3.655 3.738-.981c1.7.927 3.197 1.42 4.762 1.421zm12.338-7.593c-.073-.121-.266-.194-.559-.341-.293-.147-1.73-.853-1.997-.951-.267-.098-.46-.147-.653.147-.193.294-.747.951-.914 1.146-.167.196-.334.219-.627.073-.293-.147-1.238-.456-2.359-1.458-.871-.777-1.459-1.737-1.63-2.03-.171-.293-.018-.452.129-.597.132-.13.293-.341.44-.512.147-.171.196-.293.294-.488.098-.195.05-.366-.025-.513-.075-.147-.653-1.573-.894-2.158-.236-.569-.472-.491-.653-.5-.167-.008-.356-.01-.546-.01-.19 0-.5.071-.762.354-.262.283-1.001.976-1.001 2.38 0 1.403 1.02 2.76 1.166 2.955.147.195 2.007 3.064 4.862 4.298.679.294 1.21.469 1.62.6.683.217 1.303.186 1.793.113.546-.081 1.73-.707 1.976-1.39.247-.683.247-1.268.173-1.39z"></path></svg>
       </div>
-      <button class="btn" type="submit">
-        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        Send Message
-      </button>
-    </form>
+      <h3>WhatsApp</h3>
+      <p class="contact-value">Direct Message</p>
+      <span class="contact-btn">Chat Now</span>
+    </a>
+
   </div>
 </section>
 
