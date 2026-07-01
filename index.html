@@ -874,6 +874,111 @@ footer {
 }
 
 /* =====================================================
+   CHARACTER ANIMATIONS
+===================================================== */
+@keyframes charBob {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes charBobSlow {
+  0%,100% { transform: translateY(0px) rotate(-1deg); }
+  50%      { transform: translateY(-8px) rotate(1deg); }
+}
+@keyframes eyeBlink {
+  0%,92%,100% { transform: scaleY(1); }
+  96%          { transform: scaleY(0.08); }
+}
+@keyframes armRead {
+  0%,100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-6deg); }
+}
+@keyframes pageFlip {
+  0%,100% { d: path('M0,0 Q15,-4 30,0'); }
+  50%      { d: path('M0,0 Q15,4 30,0'); }
+}
+@keyframes typingHand {
+  0%,100% { transform: translateX(0px); }
+  25%      { transform: translateX(4px); }
+  75%      { transform: translateX(-4px); }
+}
+@keyframes screenFlicker {
+  0%,100% { opacity:1; }
+  45%      { opacity:0.85; }
+  50%      { opacity:1; }
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0) scale(1);   opacity:0.7; }
+  50%      { transform: translateY(-10px) scale(1.1); opacity:1; }
+}
+@keyframes heartBeat {
+  0%,100%  { transform: scale(1); }
+  25%,75%  { transform: scale(1.15); }
+  50%      { transform: scale(0.95); }
+}
+@keyframes starSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes codeScroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-40px); }
+}
+
+/* Character containers */
+.char-wrap {
+  position:relative;
+  display:flex; justify-content:center; align-items:flex-end;
+  pointer-events:none;
+  user-select:none;
+}
+.char-wrap svg { overflow:visible; }
+
+/* Hero character - floating */
+.hero-char-wrap {
+  position:absolute;
+  right: clamp(20px, 8vw, 120px);
+  bottom: 60px;
+  width: clamp(120px, 14vw, 190px);
+  animation: charBob 3.5s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@media(max-width:900px) { .hero-char-wrap { display:none; } }
+
+/* Section character layout */
+.section-with-char {
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: flex-start;
+}
+.section-char-side {
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  padding-top:30px;
+  position:sticky;
+  top:100px;
+}
+@media(max-width:900px) {
+  .section-with-char { grid-template-columns:1fr; }
+  .section-char-side { display:none; }
+}
+
+/* Floating context bubbles */
+.char-bubble {
+  position:absolute;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:6px 12px;
+  font-size:11px; font-weight:700; color:var(--txt2);
+  backdrop-filter:blur(8px);
+  white-space:nowrap;
+  animation: floatIcon 2.5s ease-in-out infinite;
+}
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 @media(max-width:900px) {
@@ -917,7 +1022,7 @@ footer {
      NAVIGATION
 ========================================================= -->
 <nav id="mainNav">
-  <div class="nav-logo"><span>&lt;</span>SS<span>/&gt;</span></div>
+  <div class="nav-logo"><span>System.out.println("SATYAM SHARMA");</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -967,6 +1072,109 @@ footer {
   <div class="hero-scroll-hint">
     <span>Scroll</span>
     <div class="arrow"></div>
+  </div>
+
+  <!-- HERO CHARACTER: waving & holding phone -->
+  <div class="hero-char-wrap">
+    <svg viewBox="0 0 160 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <!-- Shadow -->
+      <ellipse cx="80" cy="255" rx="38" ry="7" fill="rgba(0,0,0,0.18)"/>
+
+      <!-- BACKPACK -->
+      <rect x="88" y="115" width="32" height="50" rx="8" fill="#5ba3d9" opacity="0.9"/>
+      <rect x="90" y="122" width="28" height="14" rx="4" fill="#4a8fbf"/>
+      <rect x="91" y="138" width="26" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+
+      <!-- LEGS -->
+      <rect x="60" y="185" width="22" height="60" rx="10" fill="#3b7fc9"/>
+      <rect x="84" y="185" width="22" height="60" rx="10" fill="#2f6fb5"/>
+      <!-- Shoes -->
+      <ellipse cx="71" cy="243" rx="14" ry="7" fill="#1e293b"/>
+      <ellipse cx="95" cy="243" rx="14" ry="7" fill="#1e293b"/>
+
+      <!-- BODY / KURTA -->
+      <rect x="52" y="108" width="68" height="82" rx="18" fill="#9b7fd4"/>
+      <!-- Kurta detail lines -->
+      <line x1="80" y1="112" x2="80" y2="148" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="72" y1="118" x2="88" y2="118" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="70" y1="124" x2="90" y2="124" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- LEFT ARM - holding phone -->
+      <g style="transform-origin:60px 118px; animation:armRead 2.5s ease-in-out infinite;">
+        <rect x="36" y="118" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(-15 60 118)"/>
+        <!-- Phone -->
+        <rect x="28" y="126" width="22" height="34" rx="4" fill="#1e293b"/>
+        <rect x="30" y="129" width="18" height="26" rx="2" fill="#7c3aed" opacity="0.8"/>
+        <rect x="30" y="129" width="18" height="4" rx="1" fill="#a78bfa" opacity="0.6"/>
+        <rect x="30" y="135" width="12" height="2" rx="1" fill="rgba(255,255,255,0.4)"/>
+        <rect x="30" y="139" width="10" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+        <rect x="30" y="143" width="14" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+      </g>
+
+      <!-- RIGHT ARM - waving -->
+      <g style="transform-origin:100px 118px; animation:charBob 1.2s ease-in-out infinite;">
+        <rect x="102" y="110" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(30 102 118)"/>
+        <!-- Hand wave fingers -->
+        <ellipse cx="122" cy="104" rx="5" ry="7" fill="#c8a882" transform="rotate(-10 122 104)"/>
+        <ellipse cx="128" cy="100" rx="4" ry="7" fill="#c8a882" transform="rotate(5 128 100)"/>
+        <ellipse cx="133" cy="103" rx="4" ry="6" fill="#c8a882" transform="rotate(15 133 103)"/>
+      </g>
+
+      <!-- NECK -->
+      <rect x="73" y="90" width="16" height="22" rx="8" fill="#d4a574"/>
+
+      <!-- HEAD -->
+      <ellipse cx="80" cy="72" rx="36" ry="38" fill="#f4c2a1"/>
+
+      <!-- EAR -->
+      <ellipse cx="44" cy="72" rx="7" ry="9" fill="#e8b08a"/>
+      <ellipse cx="116" cy="72" rx="7" ry="9" fill="#e8b08a"/>
+
+      <!-- HAIR -->
+      <ellipse cx="80" cy="48" rx="36" ry="24" fill="#5d3a1a"/>
+      <rect x="44" y="44" width="72" height="16" rx="6" fill="#5d3a1a"/>
+      <!-- Hair side tuft -->
+      <ellipse cx="48" cy="60" rx="10" ry="14" fill="#5d3a1a"/>
+      <ellipse cx="112" cy="60" rx="10" ry="14" fill="#5d3a1a"/>
+      <!-- Hair highlight -->
+      <ellipse cx="70" cy="40" rx="12" ry="5" fill="#7a5030" opacity="0.5"/>
+
+      <!-- EYES -->
+      <g style="transform-origin:66px 72px; animation:eyeBlink 4s ease-in-out infinite;">
+        <ellipse cx="66" cy="72" rx="7" ry="8" fill="white"/>
+        <ellipse cx="66" cy="73" rx="4.5" ry="5" fill="#2d1b00"/>
+        <ellipse cx="64" cy="71" rx="1.5" ry="1.5" fill="white"/>
+      </g>
+      <g style="transform-origin:94px 72px; animation:eyeBlink 4s ease-in-out infinite;">
+        <ellipse cx="94" cy="72" rx="7" ry="8" fill="white"/>
+        <ellipse cx="94" cy="73" rx="4.5" ry="5" fill="#2d1b00"/>
+        <ellipse cx="92" cy="71" rx="1.5" ry="1.5" fill="white"/>
+      </g>
+
+      <!-- Eyebrows -->
+      <path d="M60 62 Q66 58 73 62" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M87 62 Q94 58 100 62" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+      <!-- NOSE -->
+      <ellipse cx="80" cy="80" rx="3" ry="2" fill="#e09070"/>
+
+      <!-- SMILE -->
+      <path d="M72 88 Q80 95 88 88" stroke="#c07050" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+      <!-- BEARD -->
+      <path d="M62 88 Q68 98 80 100 Q92 98 98 88" fill="#8B6355" opacity="0.55"/>
+
+      <!-- Floating hearts & sparkles -->
+      <g style="animation:heartBeat 1.4s ease-in-out infinite; transform-origin:135px 50px;">
+        <path d="M135 56 Q135 50 140 50 Q145 50 145 55 Q145 60 135 66 Q125 60 125 55 Q125 50 130 50 Q135 50 135 56Z" fill="#f43f5e" opacity="0.85"/>
+      </g>
+      <g style="animation:starSpin 3s linear infinite; transform-origin:22px 80px;">
+        <polygon points="22,72 24,78 30,78 25,82 27,88 22,84 17,88 19,82 14,78 20,78" fill="#fbbf24" opacity="0.7"/>
+      </g>
+      <g style="animation:floatIcon 2.2s ease-in-out infinite; transform-origin:140px 90px;">
+        <polygon points="140,83 142,89 148,89 143,93 145,99 140,95 135,99 137,93 132,89 138,89" fill="#38bdf8" opacity="0.6"/>
+      </g>
+    </svg>
   </div>
 </section>
 
@@ -1028,7 +1236,7 @@ footer {
     <div class="skill-tag"><span class="skill-tag-dot" style="background:#f05032"></span><span>Git & GitHub</span></div>
     <div class="skill-tag"><span class="skill-tag-dot" style="background:#8b5cf6"></span><span>Algorithms</span></div>
     <div class="skill-tag"><span class="skill-tag-dot" style="background:#06b6d4"></span><span>Data Structures</span></div>
-    <div class="skill-tag"><span class="skill-tag-dot" style="background:#f59e0b"></span><span>Local Networking</span></div>
+    <!--<div class="skill-tag"><span class="skill-tag-dot" style="background:#f59e0b"></span><span>Local Networking</span></div>-->
     <div class="skill-tag"><span class="skill-tag-dot" style="background:#ec4899"></span><span>AI Concepts</span></div>
     <div class="skill-tag"><span class="skill-tag-dot" style="background:#64748b"></span><span>OOP Principles</span></div>
   </div>
@@ -1041,41 +1249,177 @@ footer {
 ========================================================= -->
 <div class="section reveal" id="education">
   <div class="section-label">Background</div>
-  <h2 class="section-title">Education & Journey</h2>
+  <h2 class="section-title">Education &amp; Journey</h2>
   <p class="section-sub">The path that shaped my technical foundation.</p>
 
-  <div class="timeline">
+  <div class="section-with-char">
+    <!-- Timeline content -->
+    <div class="timeline">
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-period">2022 — Present</div>
-        <div class="tl-title">B.Tech / Engineering</div>
-        <div class="tl-sub">Computer Science & Engineering</div>
-        <div class="tl-desc">Pursuing a degree in Computer Science, focusing on data structures, algorithms, software engineering, and artificial intelligence. Active participant in coding challenges and tech communities.</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">2021 — 2024</div>
+          <div class="tl-title">Bachelor of Computer Science</div>
+          <div class="tl-sub">Computer Science &amp; Engineering</div>
+          <div class="tl-desc">Bachelor of Computer Applications (BCA) graduate with strong knowledge of Java, SQL, data structures, algorithms, database management, and software engineering. Passionate about software development, data-driven solutions, and continuously improving through coding practice and real world projects.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">2025 — Present</div>
+          <div class="tl-title">Master of Computer Applications — AI</div>
+          <div class="tl-sub">Computer Science &amp; Engineering</div>
+          <div class="tl-desc">Pursuing a Master of Computer Applications (MCA), focusing on data structures, algorithms, software engineering, database management, and artificial intelligence. Active participant in coding challenges, software development projects, and technology communities.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">2024</div>
+          <div class="tl-title">Folder Sync Project</div>
+          <div class="tl-sub">Personal Project · Python + HTML</div>
+          <div class="tl-desc">Built FolderSync — a private, cloud-free file synchronization tool over local Wi-Fi. Users scan a QR code and files sync instantly in both directions without any account or cloud dependency.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">2023 — 2024</div>
+          <div class="tl-title">Java &amp; ML Self-Learning</div>
+          <div class="tl-sub">Independent Study</div>
+          <div class="tl-desc">Deep-dived into Java development, object-oriented design patterns, and machine learning fundamentals. Completed projects involving data preprocessing, model training, and evaluation.</div>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+
+    <!-- EDUCATION CHARACTER: sitting & reading a book -->
+    <div class="section-char-side">
+      <div class="char-wrap" style="width:200px; animation:charBobSlow 4s ease-in-out infinite;">
+        <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+          <!-- Shadow -->
+          <ellipse cx="90" cy="234" rx="44" ry="8" fill="rgba(0,0,0,0.15)"/>
+
+          <!-- OPEN BOOK (sitting in lap) -->
+          <g style="transform-origin:90px 200px; animation:armRead 3s ease-in-out infinite;">
+            <!-- Book base -->
+            <rect x="42" y="190" width="96" height="42" rx="6" fill="#fff9e6"/>
+            <!-- Left page -->
+            <rect x="42" y="190" width="47" height="42" rx="6" fill="#fffbf0"/>
+            <!-- Right page -->
+            <rect x="89" y="190" width="49" height="42" rx="6" fill="#f5f0e0"/>
+            <!-- Spine -->
+            <rect x="87" y="188" width="6" height="46" rx="2" fill="#7c3aed"/>
+            <!-- Book cover color -->
+            <rect x="42" y="188" width="96" height="6" rx="3" fill="#7c3aed"/>
+            <!-- Text lines left page -->
+            <line x1="50" y1="200" x2="82" y2="200" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="206" x2="78" y2="206" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="212" x2="82" y2="212" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="218" x2="74" y2="218" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="224" x2="80" y2="224" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Text lines right page -->
+            <line x1="96" y1="200" x2="130" y2="200" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="96" y1="206" x2="126" y2="206" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="96" y1="212" x2="130" y2="212" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="96" y1="218" x2="122" y2="218" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+
+          <!-- Stack of extra books behind character -->
+          <rect x="20" y="196" width="30" height="10" rx="3" fill="#f43f5e"/>
+          <rect x="22" y="188" width="26" height="10" rx="3" fill="#fbbf24"/>
+          <rect x="140" y="196" width="30" height="10" rx="3" fill="#10b981"/>
+          <rect x="142" y="188" width="26" height="10" rx="3" fill="#0ea5e9"/>
+
+          <!-- LEGS (sitting cross-legged) -->
+          <path d="M58 192 Q50 210 45 220 Q70 218 90 215 Q110 218 135 220 Q130 210 122 192Z" fill="#3b7fc9"/>
+          <ellipse cx="46" cy="220" rx="12" ry="7" fill="#1e293b"/>
+          <ellipse cx="134" cy="220" rx="12" ry="7" fill="#1e293b"/>
+
+          <!-- BODY / KURTA -->
+          <rect x="56" y="110" width="68" height="85" rx="18" fill="#9b7fd4"/>
+          <line x1="90" y1="114" x2="90" y2="148" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="82" y1="120" x2="98" y2="120" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="80" y1="126" x2="100" y2="126" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- ARMS holding book -->
+          <rect x="34" y="130" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(20 44 137)"/>
+          <rect x="120" y="130" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(-20 136 137)"/>
+
+          <!-- Hands -->
+          <ellipse cx="44" cy="170" rx="10" ry="9" fill="#d4a574"/>
+          <ellipse cx="136" cy="170" rx="10" ry="9" fill="#d4a574"/>
+
+          <!-- NECK -->
+          <rect x="82" y="92" width="16" height="22" rx="8" fill="#d4a574"/>
+
+          <!-- HEAD -->
+          <ellipse cx="90" cy="72" rx="38" ry="38" fill="#f4c2a1"/>
+          <ellipse cx="52" cy="72" rx="8" ry="10" fill="#e8b08a"/>
+          <ellipse cx="128" cy="72" rx="8" ry="10" fill="#e8b08a"/>
+
+          <!-- HAIR -->
+          <ellipse cx="90" cy="46" rx="38" ry="26" fill="#5d3a1a"/>
+          <rect x="52" y="44" width="76" height="18" rx="6" fill="#5d3a1a"/>
+          <ellipse cx="56" cy="62" rx="12" ry="16" fill="#5d3a1a"/>
+          <ellipse cx="124" cy="62" rx="12" ry="16" fill="#5d3a1a"/>
+          <ellipse cx="78" cy="38" rx="14" ry="6" fill="#7a5030" opacity="0.45"/>
+
+          <!-- EYES (looking down at book) -->
+          <g style="animation:eyeBlink 5s ease-in-out infinite;">
+            <ellipse cx="75" cy="75" rx="7" ry="6" fill="white"/>
+            <ellipse cx="75" cy="77" rx="4.5" ry="4" fill="#2d1b00"/>
+            <ellipse cx="73" cy="75" rx="1.5" ry="1.5" fill="white"/>
+          </g>
+          <g style="animation:eyeBlink 5s ease-in-out infinite;">
+            <ellipse cx="105" cy="75" rx="7" ry="6" fill="white"/>
+            <ellipse cx="105" cy="77" rx="4.5" ry="4" fill="#2d1b00"/>
+            <ellipse cx="103" cy="75" rx="1.5" ry="1.5" fill="white"/>
+          </g>
+
+          <!-- Eyebrows (focused/raised slightly) -->
+          <path d="M68 64 Q75 60 83 64" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M97 64 Q105 60 112 64" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+          <!-- NOSE -->
+          <ellipse cx="90" cy="82" rx="3" ry="2" fill="#e09070"/>
+
+          <!-- FOCUSED MOUTH -->
+          <path d="M82 90 Q90 93 98 90" stroke="#c07050" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+          <!-- BEARD -->
+          <path d="M70 90 Q76 100 90 102 Q104 100 110 90" fill="#8B6355" opacity="0.5"/>
+
+          <!-- Floating study icons -->
+          <g style="animation:floatIcon 2.8s ease-in-out infinite; transform-origin:152px 60px;">
+            <!-- Lightbulb -->
+            <circle cx="152" cy="55" r="12" fill="#fbbf24" opacity="0.9"/>
+            <rect x="148" y="64" width="8" height="5" rx="2" fill="#f59e0b"/>
+            <line x1="152" y1="40" x2="152" y2="36" stroke="#fbbf24" stroke-width="2"/>
+            <line x1="162" y1="44" x2="165" y2="41" stroke="#fbbf24" stroke-width="2"/>
+            <line x1="142" y1="44" x2="139" y2="41" stroke="#fbbf24" stroke-width="2"/>
+          </g>
+          <g style="animation:floatIcon 3.5s ease-in-out 0.5s infinite; transform-origin:20px 130px;">
+            <!-- Pencil -->
+            <rect x="12" y="118" width="6" height="24" rx="2" fill="#fbbf24" transform="rotate(-20 15 130)"/>
+            <polygon points="12,140 18,140 15,148" fill="#f4c2a1" transform="rotate(-20 15 130)"/>
+            <rect x="12" y="118" width="6" height="5" rx="1" fill="#e11d48" transform="rotate(-20 15 130)"/>
+          </g>
+          <!-- Stars floating -->
+          <g style="animation:starSpin 4s linear infinite; transform-origin:158px 118px;">
+            <polygon points="158,112 160,118 166,118 161,122 163,128 158,124 153,128 155,122 150,118 156,118" fill="#a78bfa" opacity="0.7" transform="scale(0.8) translate(20,15)"/>
+          </g>
+        </svg>
+
+        <!-- Speech bubble -->
+        <div class="char-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation-delay:0.5s;">📖 Studying!</div>
       </div>
     </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-period">2024</div>
-        <div class="tl-title">Folder Sync Project</div>
-        <div class="tl-sub">Personal Project · Python + HTML</div>
-        <div class="tl-desc">Built FolderSync — a private, cloud-free file synchronization tool over local Wi-Fi. Users scan a QR code and files sync instantly in both directions without any account or cloud dependency.</div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-period">2023 — 2024</div>
-        <div class="tl-title">Java & ML Self-Learning</div>
-        <div class="tl-sub">Independent Study</div>
-        <div class="tl-desc">Deep-dived into Java development, object-oriented design patterns, and machine learning fundamentals. Completed projects involving data preprocessing, model training, and evaluation.</div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -1085,9 +1429,133 @@ footer {
      GITHUB PROFILE + REPOS
 ========================================================= -->
 <div class="section reveal" id="github">
-  <div class="section-label">Open Source</div>
-  <h2 class="section-title">GitHub Profile</h2>
-  <p class="section-sub">My public repositories and contributions.</p>
+  <!-- Section header with GitHub coding character -->
+  <div style="display:flex; align-items:flex-start; gap:30px; flex-wrap:wrap; margin-bottom:12px;">
+    <div style="flex:1; min-width:220px;">
+      <div class="section-label">Open Source</div>
+      <h2 class="section-title">GitHub Profile</h2>
+      <p class="section-sub">My public repositories and contributions.</p>
+    </div>
+
+    <!-- GITHUB CHARACTER: coding at laptop -->
+    <div class="char-wrap" style="width:220px; flex-shrink:0; animation:charBob 3s ease-in-out infinite; position:relative;" aria-hidden="true">
+      <svg viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+        <!-- Shadow -->
+        <ellipse cx="100" cy="245" rx="50" ry="8" fill="rgba(0,0,0,0.15)"/>
+
+        <!-- DESK -->
+        <rect x="10" y="185" width="180" height="12" rx="6" fill="#334155"/>
+        <rect x="30" y="197" width="10" height="35" rx="4" fill="#1e293b"/>
+        <rect x="160" y="197" width="10" height="35" rx="4" fill="#1e293b"/>
+
+        <!-- LAPTOP BASE -->
+        <rect x="38" y="162" width="124" height="26" rx="6" fill="#1e293b"/>
+        <!-- LAPTOP SCREEN -->
+        <rect x="44" y="110" width="112" height="56" rx="8" fill="#0f172a"/>
+        <rect x="44" y="110" width="112" height="4" rx="2" fill="#7c3aed"/>
+        <!-- Screen content / code -->
+        <g style="animation:screenFlicker 3s ease-in-out infinite;">
+          <rect x="52" y="120" width="50" height="3" rx="1" fill="#a78bfa" opacity="0.8"/>
+          <rect x="52" y="126" width="70" height="3" rx="1" fill="#38bdf8" opacity="0.7"/>
+          <rect x="60" y="132" width="40" height="3" rx="1" fill="#34d399" opacity="0.8"/>
+          <rect x="60" y="138" width="60" height="3" rx="1" fill="#fbbf24" opacity="0.6"/>
+          <rect x="52" y="144" width="55" height="3" rx="1" fill="#a78bfa" opacity="0.7"/>
+          <rect x="52" y="150" width="35" height="3" rx="1" fill="#f472b6" opacity="0.6"/>
+          <!-- Cursor blink -->
+          <rect x="88" y="150" width="2" height="8" rx="1" fill="white" opacity="0.9" style="animation:eyeBlink 1s step-end infinite;"/>
+        </g>
+        <!-- Laptop hinge -->
+        <rect x="44" y="164" width="112" height="4" rx="2" fill="#475569"/>
+        <!-- Keyboard -->
+        <rect x="48" y="170" width="104" height="14" rx="3" fill="#334155"/>
+        <rect x="54" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="65" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="76" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="87" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="98" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="109" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="120" y="173" width="8" height="4" rx="1" fill="#475569"/>
+        <rect x="62" y="179" width="76" height="4" rx="2" fill="#475569"/>
+
+        <!-- LEGS -->
+        <rect x="70" y="188" width="20" height="45" rx="8" fill="#3b7fc9"/>
+        <rect x="110" y="188" width="20" height="45" rx="8" fill="#2f6fb5"/>
+        <ellipse cx="80" cy="232" rx="14" ry="6" fill="#1e293b"/>
+        <ellipse cx="120" cy="232" rx="14" ry="6" fill="#1e293b"/>
+
+        <!-- BODY / KURTA -->
+        <rect x="62" y="100" width="76" height="90" rx="18" fill="#9b7fd4"/>
+        <line x1="100" y1="104" x2="100" y2="138" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="92" y1="110" x2="108" y2="110" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- ARMS typing -->
+        <g style="animation:typingHand 0.5s ease-in-out infinite;">
+          <rect x="40" y="138" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(15 53 145)"/>
+          <ellipse cx="48" cy="165" rx="9" ry="8" fill="#d4a574"/>
+        </g>
+        <g style="animation:typingHand 0.5s ease-in-out 0.25s infinite;">
+          <rect x="134" y="138" width="26" height="14" rx="7" fill="#c8a882" transform="rotate(-15 147 145)"/>
+          <ellipse cx="152" cy="165" rx="9" ry="8" fill="#d4a574"/>
+        </g>
+
+        <!-- NECK -->
+        <rect x="92" y="82" width="16" height="22" rx="8" fill="#d4a574"/>
+
+        <!-- HEAD -->
+        <ellipse cx="100" cy="62" rx="38" ry="38" fill="#f4c2a1"/>
+        <ellipse cx="62" cy="62" rx="8" ry="10" fill="#e8b08a"/>
+        <ellipse cx="138" cy="62" rx="8" ry="10" fill="#e8b08a"/>
+
+        <!-- HAIR -->
+        <ellipse cx="100" cy="36" rx="38" ry="26" fill="#5d3a1a"/>
+        <rect x="62" y="34" width="76" height="18" rx="6" fill="#5d3a1a"/>
+        <ellipse cx="66" cy="52" rx="12" ry="16" fill="#5d3a1a"/>
+        <ellipse cx="134" cy="52" rx="12" ry="16" fill="#5d3a1a"/>
+        <ellipse cx="88" cy="28" rx="14" ry="6" fill="#7a5030" opacity="0.45"/>
+
+        <!-- EYES (looking at screen intently) -->
+        <g style="animation:eyeBlink 6s ease-in-out infinite;">
+          <ellipse cx="85" cy="64" rx="8" ry="7" fill="white"/>
+          <ellipse cx="86" cy="65" rx="5" ry="5" fill="#2d1b00"/>
+          <ellipse cx="84" cy="63" rx="1.8" ry="1.8" fill="white"/>
+        </g>
+        <g style="animation:eyeBlink 6s ease-in-out infinite;">
+          <ellipse cx="115" cy="64" rx="8" ry="7" fill="white"/>
+          <ellipse cx="116" cy="65" rx="5" ry="5" fill="#2d1b00"/>
+          <ellipse cx="114" cy="63" rx="1.8" ry="1.8" fill="white"/>
+        </g>
+
+        <!-- Eyebrows (focused - slightly furrowed) -->
+        <path d="M78 53 Q85 49 93 53" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M107 53 Q115 49 122 53" stroke="#5d3a1a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+        <!-- NOSE -->
+        <ellipse cx="100" cy="72" rx="3" ry="2" fill="#e09070"/>
+
+        <!-- FOCUSED MOUTH (slight smile) -->
+        <path d="M92 80 Q100 85 108 80" stroke="#c07050" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+        <!-- BEARD -->
+        <path d="M80 80 Q86 90 100 92 Q114 90 120 80" fill="#8B6355" opacity="0.5"/>
+
+        <!-- Floating code icons -->
+        <g style="animation:floatIcon 2.2s ease-in-out infinite; transform-origin:170px 60px;">
+          <rect x="158" y="48" width="28" height="24" rx="5" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.4)" stroke-width="1"/>
+          <text x="162" y="64" font-size="12" fill="#a78bfa" font-family="monospace" font-weight="bold">&lt;/&gt;</text>
+        </g>
+        <g style="animation:floatIcon 3s ease-in-out 0.8s infinite; transform-origin:20px 65px;">
+          <rect x="8" y="53" width="28" height="24" rx="5" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.35)" stroke-width="1"/>
+          <text x="12" y="69" font-size="12" fill="#34d399" font-family="monospace" font-weight="bold">{ }</text>
+        </g>
+        <g style="animation:starSpin 4s linear infinite; transform-origin:168px 100px;">
+          <polygon points="168,94 170,100 176,100 171,104 173,110 168,106 163,110 165,104 160,100 166,100" fill="#fbbf24" opacity="0.7" transform="scale(0.75) translate(55,32)"/>
+        </g>
+      </svg>
+
+      <!-- Speech bubble -->
+      <div class="char-bubble" style="position:absolute;top:-28px;left:50%;transform:translateX(-50%);animation-delay:1s;">💻 Committing...</div>
+    </div>
+  </div>
 
   <!-- Profile Card -->
   <div class="gh-profile-card" id="ghProfileCard" style="margin-bottom:50px;">
@@ -1148,7 +1616,7 @@ footer {
     </a>
 
     <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/satyam-sharma" target="_blank" rel="noopener" class="contact-card cc-linkedin">
+    <a href="https://www.linkedin.com/in/satyam-sharma13122004?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" class="contact-card cc-linkedin">
       <div class="contact-glow"></div>
       <div class="cc-icon-wrap">
         <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1159,7 +1627,7 @@ footer {
     </a>
 
     <!-- WhatsApp -->
-    <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="contact-card cc-whatsapp">
+    <a href="https://wa.me/6287089715" target="_blank" rel="noopener" class="contact-card cc-whatsapp">
       <div class="contact-glow"></div>
       <div class="cc-icon-wrap">
         <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
