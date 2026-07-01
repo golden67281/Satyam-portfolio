@@ -874,111 +874,6 @@ footer {
 }
 
 /* =====================================================
-   CHARACTER ANIMATIONS
-===================================================== */
-@keyframes charBob {
-  0%,100% { transform: translateY(0px); }
-  50%      { transform: translateY(-12px); }
-}
-@keyframes charBobSlow {
-  0%,100% { transform: translateY(0px) rotate(-1deg); }
-  50%      { transform: translateY(-8px) rotate(1deg); }
-}
-@keyframes eyeBlink {
-  0%,92%,100% { transform: scaleY(1); }
-  96%          { transform: scaleY(0.08); }
-}
-@keyframes armRead {
-  0%,100% { transform: rotate(0deg); }
-  50%      { transform: rotate(-6deg); }
-}
-@keyframes pageFlip {
-  0%,100% { d: path('M0,0 Q15,-4 30,0'); }
-  50%      { d: path('M0,0 Q15,4 30,0'); }
-}
-@keyframes typingHand {
-  0%,100% { transform: translateX(0px); }
-  25%      { transform: translateX(4px); }
-  75%      { transform: translateX(-4px); }
-}
-@keyframes screenFlicker {
-  0%,100% { opacity:1; }
-  45%      { opacity:0.85; }
-  50%      { opacity:1; }
-}
-@keyframes floatIcon {
-  0%,100% { transform: translateY(0) scale(1);   opacity:0.7; }
-  50%      { transform: translateY(-10px) scale(1.1); opacity:1; }
-}
-@keyframes heartBeat {
-  0%,100%  { transform: scale(1); }
-  25%,75%  { transform: scale(1.15); }
-  50%      { transform: scale(0.95); }
-}
-@keyframes starSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes codeScroll {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-40px); }
-}
-
-/* Character containers */
-.char-wrap {
-  position:relative;
-  display:flex; justify-content:center; align-items:flex-end;
-  pointer-events:none;
-  user-select:none;
-}
-.char-wrap svg { overflow:visible; }
-
-/* Hero character - floating */
-.hero-char-wrap {
-  position:absolute;
-  right: clamp(20px, 8vw, 120px);
-  bottom: 60px;
-  width: clamp(120px, 14vw, 190px);
-  animation: charBob 3.5s ease-in-out infinite;
-  pointer-events:none;
-  z-index:2;
-}
-@media(max-width:900px) { .hero-char-wrap { display:none; } }
-
-/* Section character layout */
-.section-with-char {
-  display:grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: flex-start;
-}
-.section-char-side {
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  padding-top:30px;
-  position:sticky;
-  top:100px;
-}
-@media(max-width:900px) {
-  .section-with-char { grid-template-columns:1fr; }
-  .section-char-side { display:none; }
-}
-
-/* Floating context bubbles */
-.char-bubble {
-  position:absolute;
-  background: var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:6px 12px;
-  font-size:11px; font-weight:700; color:var(--txt2);
-  backdrop-filter:blur(8px);
-  white-space:nowrap;
-  animation: floatIcon 2.5s ease-in-out infinite;
-}
-
-/* =====================================================
    RESPONSIVE
 ===================================================== */
 @media(max-width:900px) {
@@ -1074,143 +969,6 @@ footer {
     <div class="arrow"></div>
   </div>
 
-  <!-- HERO CHARACTER: waving & holding phone -->
-  <div class="hero-char-wrap">
-    <svg viewBox="0 0 160 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible;">
-      <!-- Defs for premium gradients -->
-      <defs>
-        <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#FFE3D1"/>
-          <stop offset="100%" stop-color="#F2BE9F"/>
-        </linearGradient>
-        <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#80593F"/>
-          <stop offset="100%" stop-color="#483020"/>
-        </linearGradient>
-        <linearGradient id="kurta" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#D6C4F8"/>
-          <stop offset="100%" stop-color="#9C7CE3"/>
-        </linearGradient>
-        <linearGradient id="pants" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#6F9ED4"/>
-          <stop offset="100%" stop-color="#406B9C"/>
-        </linearGradient>
-        <linearGradient id="backpack" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#89C4E9"/>
-          <stop offset="100%" stop-color="#468CB9"/>
-        </linearGradient>
-        <linearGradient id="shoes" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#654B38"/>
-          <stop offset="100%" stop-color="#3A281C"/>
-        </linearGradient>
-        <linearGradient id="sparkle" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#FFFFFF"/>
-          <stop offset="100%" stop-color="#BEE3F8"/>
-        </linearGradient>
-      </defs>
-
-      <!-- Shadow -->
-      <ellipse cx="80" cy="255" rx="38" ry="7" fill="rgba(0,0,0,0.18)"/>
-
-      <!-- BACKPACK -->
-      <path d="M 94 135 C 90 130, 115 130, 115 145 L 115 185 C 115 190, 100 195, 94 185 Z" fill="url(#backpack)"/>
-      <path d="M 108 126 C 106 135, 108 155, 108 165" stroke="#3A7EA7" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-
-      <!-- LEGS -->
-      <path d="M 55 205 L 58 245 L 76 245 L 75 205 Z" fill="url(#pants)"/>
-      <path d="M 85 205 L 84 245 L 102 245 L 105 205 Z" fill="url(#pants)"/>
-      
-      <!-- Cuffs -->
-      <rect x="55" y="241" width="22" height="6" rx="2" fill="#E2E8F0"/>
-      <rect x="81" y="241" width="22" height="6" rx="2" fill="#E2E8F0"/>
-
-      <!-- Shoes -->
-      <path d="M 54 247 C 50 252, 55 255, 70 255 C 76 255, 78 250, 78 247 Z" fill="url(#shoes)"/>
-      <path d="M 82 247 C 82 250, 84 255, 90 255 C 105 255, 110 252, 106 247 Z" fill="url(#shoes)"/>
-
-      <!-- BODY / KURTA -->
-      <path d="M 52 125 C 48 135, 47 150, 47 175 C 47 185, 49 195, 52 205 L 108 205 C 111 195, 113 185, 113 175 C 113 150, 112 135, 108 125 Z" fill="url(#kurta)"/>
-      <path d="M 52 195 L 48 205 M 108 195 L 112 205" stroke="#7A56C4" stroke-width="2"/>
-      
-      <!-- Collar & button detail -->
-      <path d="M 72 125 Q 80 128 88 125 M 72 121 Q 80 123 88 121" stroke="#8762D1" stroke-width="2.5" fill="none"/>
-      <line x1="80" y1="125" x2="80" y2="150" stroke="#8762D1" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="80" cy="133" r="1.5" fill="#FFFFFF"/>
-      <circle cx="80" cy="142" r="1.5" fill="#FFFFFF"/>
-
-      <!-- LEFT ARM - holding phone -->
-      <g style="transform-origin:60px 118px; animation:armRead 2.5s ease-in-out infinite;">
-        <path d="M 50 126 C 40 132, 34 140, 36 150 C 37 153, 44 154, 47 148" fill="url(#kurta)"/>
-        <path d="M 36 150 C 32 153, 30 162, 36 168 C 42 166, 44 158, 42 152" fill="url(#skin)"/>
-        <!-- Phone -->
-        <rect x="22" y="142" width="18" height="30" rx="4" fill="#2E3A4E" transform="rotate(-10 31 157)"/>
-        <rect x="24" y="144" width="14" height="26" rx="2" fill="#1A202C" transform="rotate(-10 31 157)"/>
-        <rect x="24" y="144" width="14" height="26" rx="2" fill="#7C3AED" opacity="0.8" transform="rotate(-10 31 157)"/>
-      </g>
-
-      <!-- RIGHT ARM - pointing -->
-      <g style="transform-origin:100px 118px; animation:charBob 1.2s ease-in-out infinite;">
-        <path d="M 110 126 C 116 130, 120 138, 120 148 C 117 152, 110 150, 108 144" fill="url(#kurta)"/>
-        <path d="M 112 144 C 112 144, 98 152, 90 154 C 88 154, 88 158, 92 158 C 98 158, 108 152, 110 148" fill="url(#skin)"/>
-      </g>
-
-      <!-- NECK -->
-      <rect x="73" y="90" width="14" height="22" rx="7" fill="url(#skin)"/>
-
-      <!-- HEAD -->
-      <path d="M45,75 Q40,110 80,110 Q120,110 115,75 Q118,65 118,55 Q115,35 80,35 Q45,35 42,55 Q42,65 45,75 Z" fill="url(#skin)"/>
-
-      <!-- EAR -->
-      <ellipse cx="44" cy="72" rx="6" ry="8" fill="#e8b08a"/>
-      <ellipse cx="116" cy="72" rx="6" ry="8" fill="#e8b08a"/>
-
-      <!-- HAIR -->
-      <path d="M 45 60 C 40 40, 50 25, 75 22 C 105 20, 118 35, 116 55 C 114 62, 111 65, 108 60 C 102 52, 95 48, 80 50 C 65 52, 55 58, 45 60 Z" fill="url(#hair)"/>
-      <path d="M 42 55 C 48 30, 95 28, 116 48 C 116 48, 105 44, 98 48 C 88 53, 76 64, 62 64 C 52 64, 46 58, 42 55 Z" fill="url(#hair)"/>
-
-      <!-- EYES -->
-      <g style="transform-origin:64px 74px; animation:eyeBlink 4s ease-in-out infinite;">
-        <ellipse cx="64" cy="74" rx="8" ry="10" fill="#2B1A0A"/>
-        <ellipse cx="64" cy="74" rx="6.5" ry="8.5" fill="#140B04"/>
-        <circle cx="61.5" cy="70" r="3.2" fill="#FFFFFF"/>
-        <circle cx="67" cy="78" r="1.5" fill="#FFFFFF"/>
-      </g>
-      <g style="transform-origin:96px 74px; animation:eyeBlink 4s ease-in-out infinite;">
-        <ellipse cx="96" cy="74" rx="8" ry="10" fill="#2B1A0A"/>
-        <ellipse cx="96" cy="74" rx="6.5" ry="8.5" fill="#140B04"/>
-        <circle cx="93.5" cy="70" r="3.2" fill="#FFFFFF"/>
-        <circle cx="99" cy="78" r="1.5" fill="#FFFFFF"/>
-      </g>
-
-      <!-- Eyebrows -->
-      <path d="M 54 62 Q 64 57 72 63" stroke="#2B1A0A" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M 88 63 Q 96 57 106 62" stroke="#2B1A0A" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-      <!-- NOSE -->
-      <path d="M 78 82 Q 80 80 82 82" stroke="#DCA08A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-      <!-- SMILE -->
-      <path d="M 73 90 Q 80 94 87 90" stroke="#9C523C" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-      <!-- BEARD -->
-      <path d="M 46 78 Q 40 98 80 106 Q 120 98 114 78 Q 106 94 80 96 Q 54 94 46 78 Z" fill="#5C4638" opacity="0.45"/>
-      <path d="M 68 86 Q 80 89 92 86 Q 80 94 68 86 Z" fill="#5C4638" opacity="0.45"/>
-
-      <!-- Floating hearts & sparkles -->
-      <g style="animation:heartBeat 1.4s ease-in-out infinite; transform-origin:115px 25px;">
-        <path d="M 115 25 C 112 20 106 20 103 23 C 100 20 94 20 91 23 C 88 26 88 32 94 37 L 103 45 L 112 37 C 118 32 118 26 115 25 Z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      <g style="animation:starSpin 3s linear infinite; transform-origin:135px 240px;">
-        <path d="M125 240 Q135 240 135 230 Q135 240 145 240 Q135 240 135 250 Q135 240 125 240 Z" fill="url(#sparkle)"/>
-      </g>
-      <!-- Action lines -->
-      <g>
-        <line x1="125" y1="42" x2="135" y2="35" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="128" y1="49" x2="140" y2="46" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="123" y1="56" x2="134" y2="58" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-      </g>
-    </svg>
-  </div>
 </section>
 
 <div class="section-divider"></div>
@@ -1287,195 +1045,47 @@ footer {
   <h2 class="section-title">Education &amp; Journey</h2>
   <p class="section-sub">The path that shaped my technical foundation.</p>
 
-  <div class="section-with-char">
-    <!-- Timeline content -->
-    <div class="timeline">
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-period">2021 — 2024</div>
-          <div class="tl-title">Bachelor of Computer Science</div>
-          <div class="tl-sub">Computer Science &amp; Engineering</div>
-          <div class="tl-desc">Bachelor of Computer Applications (BCA) graduate with strong knowledge of Java, SQL, data structures, algorithms, database management, and software engineering. Passionate about software development, data-driven solutions, and continuously improving through coding practice and real world projects.</div>
-        </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-period">2021 — 2024</div>
+        <div class="tl-title">Bachelor of Computer Science</div>
+        <div class="tl-sub">Computer Science &amp; Engineering</div>
+        <div class="tl-desc">Bachelor of Computer Applications (BCA) graduate with strong knowledge of Java, SQL, data structures, algorithms, database management, and software engineering. Passionate about software development, data-driven solutions, and continuously improving through coding practice and real world projects.</div>
       </div>
+    </div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-period">2025 — Present</div>
-          <div class="tl-title">Master of Computer Applications — AI</div>
-          <div class="tl-sub">Computer Science &amp; Engineering</div>
-          <div class="tl-desc">Pursuing a Master of Computer Applications (MCA), focusing on data structures, algorithms, software engineering, database management, and artificial intelligence. Active participant in coding challenges, software development projects, and technology communities.</div>
-        </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-period">2025 — Present</div>
+        <div class="tl-title">Master of Computer Applications — AI</div>
+        <div class="tl-sub">Computer Science &amp; Engineering</div>
+        <div class="tl-desc">Pursuing a Master of Computer Applications (MCA), focusing on data structures, algorithms, software engineering, database management, and artificial intelligence. Active participant in coding challenges, software development projects, and technology communities.</div>
       </div>
+    </div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-period">2024</div>
-          <div class="tl-title">Folder Sync Project</div>
-          <div class="tl-sub">Personal Project · Python + HTML</div>
-          <div class="tl-desc">Built FolderSync — a private, cloud-free file synchronization tool over local Wi-Fi. Users scan a QR code and files sync instantly in both directions without any account or cloud dependency.</div>
-        </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-period">2024</div>
+        <div class="tl-title">Folder Sync Project</div>
+        <div class="tl-sub">Personal Project · Python + HTML</div>
+        <div class="tl-desc">Built FolderSync — a private, cloud-free file synchronization tool over local Wi-Fi. Users scan a QR code and files sync instantly in both directions without any account or cloud dependency.</div>
       </div>
+    </div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-period">2023 — 2024</div>
-          <div class="tl-title">Java &amp; ML Self-Learning</div>
-          <div class="tl-sub">Independent Study</div>
-          <div class="tl-desc">Deep-dived into Java development, object-oriented design patterns, and machine learning fundamentals. Completed projects involving data preprocessing, model training, and evaluation.</div>
-        </div>
-      </div>
-
-    </div><!-- end timeline -->
-
-    <!-- EDUCATION CHARACTER: sitting & reading a book -->
-    <div class="section-char-side">
-      <div class="char-wrap" style="width:200px; animation:charBobSlow 4s ease-in-out infinite;">
-        <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
-          <!-- Defs for premium gradients -->
-          <defs>
-            <linearGradient id="skinEd" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FFE3D1"/>
-              <stop offset="100%" stop-color="#F2BE9F"/>
-            </linearGradient>
-            <linearGradient id="hairEd" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#80593F"/>
-              <stop offset="100%" stop-color="#483020"/>
-            </linearGradient>
-            <linearGradient id="kurtaEd" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#D6C4F8"/>
-              <stop offset="100%" stop-color="#9C7CE3"/>
-            </linearGradient>
-            <linearGradient id="pantsEd" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#6F9ED4"/>
-              <stop offset="100%" stop-color="#406B9C"/>
-            </linearGradient>
-            <linearGradient id="backpackEd" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#89C4E9"/>
-              <stop offset="100%" stop-color="#468CB9"/>
-            </linearGradient>
-            <linearGradient id="shoesEd" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#654B38"/>
-              <stop offset="100%" stop-color="#3A281C"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Shadow -->
-          <ellipse cx="90" cy="234" rx="44" ry="8" fill="rgba(0,0,0,0.15)"/>
-
-          <!-- BACKPACK -->
-          <path d="M 40 135 C 36 130, 61 130, 61 145 L 61 185 C 61 190, 46 195, 40 185 Z" fill="url(#backpackEd)" opacity="0.8"/>
-
-          <!-- OPEN BOOK (sitting in lap) -->
-          <g style="transform-origin:90px 200px; animation:armRead 3s ease-in-out infinite;">
-            <!-- Book base -->
-            <rect x="42" y="190" width="96" height="42" rx="6" fill="#fff9e6"/>
-            <!-- Left page -->
-            <rect x="42" y="190" width="47" height="42" rx="6" fill="#fffbf0"/>
-            <!-- Right page -->
-            <rect x="89" y="190" width="49" height="42" rx="6" fill="#f5f0e0"/>
-            <!-- Spine -->
-            <rect x="87" y="188" width="6" height="46" rx="2" fill="#7c3aed"/>
-            <!-- Book cover color -->
-            <rect x="42" y="188" width="96" height="6" rx="3" fill="#7c3aed"/>
-            <!-- Text lines left page -->
-            <line x1="50" y1="200" x2="82" y2="200" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="50" y1="206" x2="78" y2="206" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="50" y1="212" x2="82" y2="212" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="50" y1="218" x2="74" y2="218" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Text lines right page -->
-            <line x1="96" y1="200" x2="130" y2="200" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="96" y1="206" x2="126" y2="206" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="96" y1="212" x2="130" y2="212" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-          </g>
-
-          <!-- Stack of extra books behind character -->
-          <rect x="20" y="196" width="30" height="10" rx="3" fill="#f43f5e"/>
-          <rect x="22" y="188" width="26" height="10" rx="3" fill="#fbbf24"/>
-
-          <!-- LEGS (sitting cross-legged) -->
-          <path d="M58 192 Q50 210 45 220 Q70 218 90 215 Q110 218 135 220 Q130 210 122 192Z" fill="url(#pantsEd)"/>
-          <ellipse cx="46" cy="220" rx="12" ry="7" fill="url(#shoesEd)"/>
-          <ellipse cx="134" cy="220" rx="12" ry="7" fill="url(#shoesEd)"/>
-
-          <!-- BODY / KURTA -->
-          <path d="M 56 115 C 52 125, 51 140, 51 165 C 51 175, 53 185, 56 195 L 124 195 C 127 185, 129 175, 129 165 C 129 140, 128 125, 124 115 Z" fill="url(#kurtaEd)"/>
-          
-          <!-- Collar & placket -->
-          <path d="M 82 115 Q 90 118 98 115 M 82 111 Q 90 113 98 111" stroke="#8762D1" stroke-width="2.5" fill="none"/>
-          <line x1="90" y1="115" x2="90" y2="140" stroke="#8762D1" stroke-width="2" stroke-linecap="round"/>
-
-          <!-- ARMS holding book -->
-          <path d="M 44 130 C 34 135, 34 150, 42 165" stroke="url(#kurtaEd)" stroke-width="12" stroke-linecap="round"/>
-          <path d="M 136 130 C 146 135, 146 150, 138 165" stroke="url(#kurtaEd)" stroke-width="12" stroke-linecap="round"/>
-
-          <!-- Hands -->
-          <ellipse cx="46" cy="168" rx="8" ry="7" fill="url(#skinEd)"/>
-          <ellipse cx="134" cy="168" rx="8" ry="7" fill="url(#skinEd)"/>
-
-          <!-- NECK -->
-          <rect x="83" y="92" width="14" height="22" rx="7" fill="url(#skinEd)"/>
-
-          <!-- HEAD -->
-          <path d="M55,75 Q50,110 90,110 Q130,110 125,75 Q128,65 128,55 Q125,35 90,35 Q55,35 52,55 Q52,65 55,75 Z" fill="url(#skinEd)"/>
-
-          <!-- HAIR -->
-          <path d="M 55 60 C 50 40, 60 25, 85 22 C 115 20, 128 35, 126 55 C 124 62, 121 65, 118 60 C 112 52, 105 48, 90 50 C 75 52, 65 58, 55 60 Z" fill="url(#hairEd)"/>
-          <path d="M 52 55 C 58 30, 105 28, 126 48 C 126 48, 115 44, 108 48 C 98 53, 86 64, 72 64 C 62 64, 56 58, 52 55 Z" fill="url(#hairEd)"/>
-
-          <!-- EYES (looking down at book) -->
-          <g style="transform-origin:74px 74px; animation:eyeBlink 5s ease-in-out infinite;">
-            <ellipse cx="74" cy="74" rx="8" ry="9" fill="#2B1A0A"/>
-            <ellipse cx="74" cy="75" rx="6" ry="7" fill="#140B04"/>
-            <circle cx="71.5" cy="71" r="2.8" fill="#FFFFFF"/>
-          </g>
-          <g style="transform-origin:106px 74px; animation:eyeBlink 5s ease-in-out infinite;">
-            <ellipse cx="106" cy="74" rx="8" ry="9" fill="#2B1A0A"/>
-            <ellipse cx="106" cy="75" rx="6" ry="7" fill="#140B04"/>
-            <circle cx="103.5" cy="71" r="2.8" fill="#FFFFFF"/>
-          </g>
-
-          <!-- Eyebrows -->
-          <path d="M64 63 Q72 58 80 64" stroke="#2B1A0A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <path d="M98 64 Q106 58 114 63" stroke="#2B1A0A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-
-          <!-- NOSE -->
-          <path d="M 88 82 Q 90 80 92 82" stroke="#DCA08A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-          <!-- SMILE -->
-          <path d="M 83 90 Q 90 94 97 90" stroke="#9C523C" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-          <!-- BEARD -->
-          <path d="M 56 78 Q 50 98 90 106 Q 130 98 124 78 Q 116 94 90 96 Q 64 94 56 78 Z" fill="#5C4638" opacity="0.45"/>
-          <path d="M 78 86 Q 90 89 102 86 Q 90 94 78 86 Z" fill="#5C4638" opacity="0.45"/>
-
-          <!-- Floating study icons -->
-          <g style="animation:floatIcon 2.8s ease-in-out infinite; transform-origin:152px 60px;">
-            <!-- Lightbulb -->
-            <circle cx="152" cy="55" r="10" fill="#fbbf24" opacity="0.9"/>
-            <rect x="149" y="63" width="6" height="4" rx="1.5" fill="#f59e0b"/>
-            <line x1="152" y1="42" x2="152" y2="39" stroke="#fbbf24" stroke-width="1.5"/>
-            <line x1="160" y1="46" x2="162" y2="44" stroke="#fbbf24" stroke-width="1.5"/>
-            <line x1="144" y1="46" x2="142" y2="44" stroke="#fbbf24" stroke-width="1.5"/>
-          </g>
-          <g style="animation:floatIcon 3.5s ease-in-out 0.5s infinite; transform-origin:20px 130px;">
-            <!-- Pencil -->
-            <rect x="12" y="118" width="5" height="20" rx="1.5" fill="#fbbf24" transform="rotate(-20 15 130)"/>
-            <polygon points="12,136 17,136 14.5,143" fill="#f4c2a1" transform="rotate(-20 15 130)"/>
-          </g>
-        </svg>
-
-        <!-- Speech bubble -->
-        <div class="char-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation-delay:0.5s;">📖 Studying!</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-period">2023 — 2024</div>
+        <div class="tl-title">Java &amp; ML Self-Learning</div>
+        <div class="tl-sub">Independent Study</div>
+        <div class="tl-desc">Deep-dived into Java development, object-oriented design patterns, and machine learning fundamentals. Completed projects involving data preprocessing, model training, and evaluation.</div>
       </div>
     </div>
   </div>
-</div>
 
 <div class="section-divider"></div>
 
@@ -1483,159 +1093,9 @@ footer {
      GITHUB PROFILE + REPOS
 ========================================================= -->
 <div class="section reveal" id="github">
-  <!-- Section header with GitHub coding character -->
-  <div style="display:flex; align-items:flex-start; gap:30px; flex-wrap:wrap; margin-bottom:12px;">
-    <div style="flex:1; min-width:220px;">
-      <div class="section-label">Open Source</div>
-      <h2 class="section-title">GitHub Profile</h2>
-      <p class="section-sub">My public repositories and contributions.</p>
-    </div>
-
-    <!-- GITHUB CHARACTER: coding at laptop -->
-    <div class="char-wrap" style="width:220px; flex-shrink:0; animation:charBob 3s ease-in-out infinite; position:relative;" ar      <svg viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
-        <!-- Defs for premium gradients -->
-        <defs>
-          <linearGradient id="skinGh" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FFE3D1"/>
-            <stop offset="100%" stop-color="#F2BE9F"/>
-          </linearGradient>
-          <linearGradient id="hairGh" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#80593F"/>
-            <stop offset="100%" stop-color="#483020"/>
-          </linearGradient>
-          <linearGradient id="kurtaGh" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#D6C4F8"/>
-            <stop offset="100%" stop-color="#9C7CE3"/>
-          </linearGradient>
-          <linearGradient id="pantsGh" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#6F9ED4"/>
-            <stop offset="100%" stop-color="#406B9C"/>
-          </linearGradient>
-          <linearGradient id="backpackGh" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#89C4E9"/>
-            <stop offset="100%" stop-color="#468CB9"/>
-          </linearGradient>
-          <linearGradient id="shoesGh" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#654B38"/>
-            <stop offset="100%" stop-color="#3A281C"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Shadow -->
-        <ellipse cx="100" cy="245" rx="50" ry="8" fill="rgba(0,0,0,0.15)"/>
-
-        <!-- DESK -->
-        <rect x="10" y="185" width="180" height="12" rx="6" fill="#334155"/>
-        <rect x="30" y="197" width="10" height="35" rx="4" fill="#1e293b"/>
-        <rect x="160" y="197" width="10" height="35" rx="4" fill="#1e293b"/>
-
-        <!-- LAPTOP BASE -->
-        <rect x="38" y="162" width="124" height="26" rx="6" fill="#1e293b"/>
-        <!-- LAPTOP SCREEN -->
-        <rect x="44" y="110" width="112" height="56" rx="8" fill="#0f172a"/>
-        <rect x="44" y="110" width="112" height="4" rx="2" fill="#7c3aed"/>
-        <!-- Screen content / code -->
-        <g style="animation:screenFlicker 3s ease-in-out infinite;">
-          <rect x="52" y="120" width="50" height="3" rx="1" fill="#a78bfa" opacity="0.8"/>
-          <rect x="52" y="126" width="70" height="3" rx="1" fill="#38bdf8" opacity="0.7"/>
-          <rect x="60" y="132" width="40" height="3" rx="1" fill="#34d399" opacity="0.8"/>
-          <rect x="60" y="138" width="60" height="3" rx="1" fill="#fbbf24" opacity="0.6"/>
-          <rect x="52" y="144" width="55" height="3" rx="1" fill="#a78bfa" opacity="0.7"/>
-          <rect x="52" y="150" width="35" height="3" rx="1" fill="#f472b6" opacity="0.6"/>
-          <!-- Cursor blink -->
-          <rect x="88" y="150" width="2" height="8" rx="1" fill="white" opacity="0.9" style="animation:eyeBlink 1s step-end infinite;"/>
-        </g>
-        <!-- Laptop hinge -->
-        <rect x="44" y="164" width="112" height="4" rx="2" fill="#475569"/>
-        <!-- Keyboard -->
-        <rect x="48" y="170" width="104" height="14" rx="3" fill="#334155"/>
-        <rect x="54" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="65" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="76" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="87" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="98" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="109" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="120" y="173" width="8" height="4" rx="1" fill="#475569"/>
-        <rect x="62" y="179" width="76" height="4" rx="2" fill="#475569"/>
-
-        <!-- LEGS -->
-        <rect x="70" y="188" width="20" height="45" rx="8" fill="url(#pantsGh)"/>
-        <rect x="110" y="188" width="20" height="45" rx="8" fill="url(#pantsGh)"/>
-        <ellipse cx="80" cy="232" rx="14" ry="6" fill="url(#shoesGh)"/>
-        <ellipse cx="120" cy="232" rx="14" ry="6" fill="url(#shoesGh)"/>
-
-        <!-- BACKPACK ON BACK -->
-        <path d="M 130 115 C 126 110, 151 110, 151 125 L 151 155 C 151 160, 136 165, 130 155 Z" fill="url(#backpackGh)" opacity="0.85"/>
-
-        <!-- BODY / KURTA -->
-        <path d="M 62 105 C 58 115, 57 130, 57 155 C 57 165, 59 175, 62 185 L 138 185 C 141 175, 143 165, 143 155 C 143 130, 142 115, 138 105 Z" fill="url(#kurtaGh)"/>
-        <path d="M 82 105 Q 90 108 98 105 M 82 101 Q 90 103 98 101" stroke="#8762D1" stroke-width="2.5" fill="none"/>
-        <line x1="90" y1="105" x2="90" y2="130" stroke="#8762D1" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- ARMS typing -->
-        <g style="animation:typingHand 0.5s ease-in-out infinite;">
-          <path d="M 46 125 C 38 130, 38 145, 46 160" stroke="url(#kurtaGh)" stroke-width="11" stroke-linecap="round"/>
-          <ellipse cx="48" cy="162" rx="7" ry="6" fill="url(#skinGh)"/>
-        </g>
-        <g style="animation:typingHand 0.5s ease-in-out 0.25s infinite;">
-          <path d="M 148 125 C 158 130, 158 145, 150 160" stroke="url(#kurtaGh)" stroke-width="11" stroke-linecap="round"/>
-          <ellipse cx="146" cy="162" rx="7" ry="6" fill="url(#skinGh)"/>
-        </g>
-
-        <!-- NECK -->
-        <rect x="93" y="82" width="14" height="22" rx="7" fill="url(#skinGh)"/>
-
-        <!-- HEAD -->
-        <path d="M65,75 Q60,110 100,110 Q140,110 135,75 Q138,65 138,55 Q135,35 100,35 Q65,35 62,55 Q62,65 65,75 Z" fill="url(#skinGh)"/>
-
-        <!-- HAIR -->
-        <path d="M 65 60 C 60 40, 70 25, 95 22 C 125 20, 138 35, 136 55 C 134 62, 131 65, 128 60 C 122 52, 115 48, 100 50 C 85 52, 75 58, 65 60 Z" fill="url(#hairGh)"/>
-        <path d="M 62 55 C 68 30, 115 28, 136 48 C 136 48, 125 44, 118 48 C 108 53, 96 64, 82 64 C 72 64, 66 58, 62 55 Z" fill="url(#hairGh)"/>
-
-        <!-- EYES (looking at screen intently) -->
-        <g style="transform-origin:84px 74px; animation:eyeBlink 6s ease-in-out infinite;">
-          <ellipse cx="84" cy="74" rx="8" ry="9" fill="#2B1A0A"/>
-          <ellipse cx="84" cy="75" rx="6" ry="7" fill="#140B04"/>
-          <circle cx="81.5" cy="71" r="2.8" fill="#FFFFFF"/>
-        </g>
-        <g style="transform-origin:116px 74px; animation:eyeBlink 6s ease-in-out infinite;">
-          <ellipse cx="116" cy="74" rx="8" ry="9" fill="#2B1A0A"/>
-          <ellipse cx="116" cy="75" rx="6" ry="7" fill="#140B04"/>
-          <circle cx="113.5" cy="71" r="2.8" fill="#FFFFFF"/>
-        </g>
-
-        <!-- Eyebrows -->
-        <path d="M74 63 Q82 58 90 64" stroke="#2B1A0A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M108 64 Q116 58 124 63" stroke="#2B1A0A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-
-        <!-- NOSE -->
-        <path d="M 98 82 Q 100 80 102 82" stroke="#DCA08A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-        <!-- SMILE -->
-        <path d="M 93 90 Q 100 94 107 90" stroke="#9C523C" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-        <!-- BEARD -->
-        <path d="M 66 78 Q 60 98 100 106 Q 140 98 134 78 Q 126 94 100 96 Q 74 94 66 78 Z" fill="#5C4638" opacity="0.45"/>
-        <path d="M 88 86 Q 100 89 112 86 Q 100 94 88 86 Z" fill="#5C4638" opacity="0.45"/>
-
-        <!-- Floating code icons -->
-        <g style="animation:floatIcon 2.2s ease-in-out infinite; transform-origin:170px 60px;">
-          <rect x="158" y="48" width="28" height="24" rx="5" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.4)" stroke-width="1"/>
-          <text x="162" y="64" font-size="12" fill="#a78bfa" font-family="monospace" font-weight="bold">&lt;/&gt;</text>
-        </g>
-        <g style="animation:floatIcon 3s ease-in-out 0.8s infinite; transform-origin:20px 65px;">
-          <rect x="8" y="53" width="28" height="24" rx="5" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.35)" stroke-width="1"/>
-          <text x="12" y="69" font-size="12" fill="#34d399" font-family="monospace" font-weight="bold">{ }</text>
-        </g>
-        <g style="animation:starSpin 4s linear infinite; transform-origin:168px 100px;">
-          <polygon points="168,94 170,100 176,100 171,104 173,110 168,106 163,110 165,104 160,100 166,100" fill="#fbbf24" opacity="0.7" transform="scale(0.75) translate(55,32)"/>
-        </g>
-      </svg>
-
-      <!-- Speech bubble -->
-      <div class="char-bubble" style="position:absolute;top:-28px;left:50%;transform:translateX(-50%);animation-delay:1s;">💻 Committing...</div>
-    </div>
-  </div>
+  <div class="section-label">Open Source</div>
+  <h2 class="section-title">GitHub Profile</h2>
+  <p class="section-sub">My public repositories and contributions.</p>
 
   <!-- Profile Card -->
   <div class="gh-profile-card" id="ghProfileCard" style="margin-bottom:50px;">
