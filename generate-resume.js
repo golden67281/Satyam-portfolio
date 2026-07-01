@@ -71,9 +71,11 @@ async function run() {
     const key = getMetadataKey(repo.name);
     if (key) {
       processedKeys.add(key);
-      const bullets = metadata[key];
+      const entry = metadata[key];
       const displayName = key.replace(/_/g, ' ');
-      const lang = repo.language || 'Python, HTML';
+      const isObj = !Array.isArray(entry);
+      const bullets = isObj ? entry.bullets : entry;
+      const lang = isObj ? entry.languages : (repo.language || 'Python, HTML');
       projectsHtml.push(renderProject(displayName, lang, bullets));
     }
   }
@@ -81,9 +83,12 @@ async function run() {
   // Include any metadata projects that were not found in the fetched GitHub list (offline backup)
   for (const key in metadata) {
     if (!processedKeys.has(key)) {
-      const bullets = metadata[key];
+      const entry = metadata[key];
       const displayName = key.replace(/_/g, ' ');
-      projectsHtml.push(renderProject(displayName, 'Python, Flask, MySQL', bullets));
+      const isObj = !Array.isArray(entry);
+      const bullets = isObj ? entry.bullets : entry;
+      const lang = isObj ? entry.languages : 'Python, Flask, MySQL';
+      projectsHtml.push(renderProject(displayName, lang, bullets));
     }
   }
 
